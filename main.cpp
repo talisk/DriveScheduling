@@ -23,8 +23,7 @@ bool greatermark(const Process& s1,const Process& s2) {
 
 void receiveRequest(deque<Process> &waitingQueue, deque<Process> &schedulingQueue) {
     cout<<"Need a new process? Y/N --> ";
-    string selection;
-    cin>>selection;
+    string selection; cin>>selection;
 
     if (selection=="Y" || selection=="y") {
 
@@ -72,20 +71,19 @@ void receiveRequest(deque<Process> &waitingQueue, deque<Process> &schedulingQueu
 }
 
 void printRequestQueue(deque<Process> &waitingQueue, deque<Process> &schedulingQueue) {
-    deque<Process>::iterator it;
 
-    cout<<"scheduling:"<<endl;
+    cout<<"- Current Physical Address: "<<currentPhysicalAddress<<endl;
+
+    deque<Process>::iterator it;
 
     for (it = schedulingQueue.begin(); it != schedulingQueue.end(); it++) {
         cout<<"--------------------------"<<endl;
-        cout<<(*it).processName<<endl<<(*it).cylinder<<endl<<(*it).track<<endl<<(*it).physicalRecord<<endl<<(*it).physicalAddress<<endl<<endl<<endl;
+        cout<<"Process Name:\t"<<(*it).processName<<endl<<"Cylinder:\t\t"<<(*it).cylinder<<endl<<"Track:\t\t\t"<<(*it).track<<endl<<"Phy Record:\t\t"<<(*it).physicalRecord<<endl<<"Phy Address:\t"<<(*it).physicalAddress<<endl<<endl<<endl;
     }
-
-    cout<<"waiting:"<<endl;
 
     for (it = waitingQueue.begin(); it != waitingQueue.end(); it++) {
         cout<<"--------------------------"<<endl;
-        cout<<(*it).processName<<endl<<(*it).cylinder<<endl<<(*it).track<<endl<<(*it).physicalRecord<<endl<<(*it).physicalAddress<<endl<<endl<<endl;
+        cout<<"Process Name:\t"<<(*it).processName<<endl<<"Cylinder:\t\t"<<(*it).cylinder<<endl<<"Track:\t\t\t"<<(*it).track<<endl<<"Phy Record:\t\t"<<(*it).physicalRecord<<endl<<"Phy Address:\t"<<(*it).physicalAddress<<endl<<endl<<endl;
     }
 }
 
@@ -112,6 +110,7 @@ void driveSchedule(deque<Process> &waitingQueue, deque<Process> &schedulingQueue
         currentPhysicalAddress = schedulingQueue.back().physicalAddress;
         schedulingQueue.pop_back();
     }
+
 }
 
 int main() {
@@ -131,5 +130,4 @@ int main() {
         receiveRequest(waitingQueue, schedulingQueue);
         printRequestQueue(waitingQueue, schedulingQueue);
     }
-
 }
