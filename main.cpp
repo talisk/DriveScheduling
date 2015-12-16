@@ -115,8 +115,8 @@ void driveSchedule(deque<Process> &waitingQueue, deque<Process> &schedulingQueue
 
 int main() {
 
-    forwardAccess = true;
-    currentPhysicalAddress = 600;
+    forwardAccess = true;   // 规定方向
+    currentPhysicalAddress = 600;  // 设置初始地址
 
     deque<Process> waitingQueue, schedulingQueue;
 
@@ -125,9 +125,9 @@ int main() {
         printRequestQueue(waitingQueue, schedulingQueue);
     }
 
-    while (1) {
-        driveSchedule(waitingQueue, schedulingQueue);
+    while (waitingQueue.size() || schedulingQueue.size()) {
         receiveRequest(waitingQueue, schedulingQueue);
+        driveSchedule(waitingQueue, schedulingQueue);
         printRequestQueue(waitingQueue, schedulingQueue);
     }
 }
